@@ -27,11 +27,66 @@
       min-height: 100vh;
     }
 
+    /* LOGIN SCREEN */
+    #login-screen {
+      min-height: 100vh;
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    #login-screen h1 {
+      color: #F7F5F0;
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 400;
+      letter-spacing: -0.5px;
+    }
+
+    #login-screen p {
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      max-width: 320px;
+    }
+
+    .google-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .google-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .google-btn svg { width: 20px; height: 20px; }
+
+    /* APP */
+    #app { display: none; }
+
     /* HEADER */
     header {
       background: var(--dark);
-      padding: 52px 24px 44px;
+      padding: 40px 24px 36px;
       text-align: center;
+      position: relative;
     }
 
     .header-eyebrow {
@@ -40,16 +95,16 @@
       letter-spacing: 4px;
       color: var(--muted);
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     header h1 {
-      font-size: clamp(24px, 5vw, 40px);
+      font-size: clamp(22px, 4vw, 36px);
       font-weight: 400;
       color: #F7F5F0;
       letter-spacing: -0.5px;
       line-height: 1.2;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     header p {
@@ -57,6 +112,59 @@
       font-size: 12px;
       color: var(--muted);
     }
+
+    /* USER BAR */
+    #user-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #2e2e2e;
+    }
+
+    #user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+    }
+
+    #user-name {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 1px;
+    }
+
+    .logout-btn {
+      background: transparent;
+      border: 1px solid #444;
+      color: #888;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-family: 'Courier New', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover { border-color: #888; color: #ccc; }
+
+    /* SAVE STATUS */
+    #save-status {
+      font-family: 'Courier New', monospace;
+      font-size: 10px;
+      color: var(--green);
+      letter-spacing: 1px;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    #save-status.visible { opacity: 1; }
 
     /* TABS */
     nav {
@@ -81,22 +189,16 @@
     }
 
     .tab:hover { color: #ccc; }
-
     .tab.active-entrambi { color: #fff; background: var(--gold); border-bottom-color: var(--gold); }
     .tab.active-venditore { color: #fff; background: var(--green); border-bottom-color: var(--green); }
     .tab.active-acquirente { color: #fff; background: var(--blue); border-bottom-color: var(--blue); }
 
     /* CONTENT */
-    main {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
+    main { max-width: 680px; margin: 0 auto; padding: 40px 24px 80px; }
 
     .section { display: none; }
     .section.visible { display: block; }
 
-    /* BADGE */
     .badge {
       display: inline-flex;
       align-items: center;
@@ -111,18 +213,11 @@
       margin-bottom: 28px;
     }
 
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
     .badge.entrambi { background: #2D2D2D; }
     .badge.venditore { background: var(--green-dark); }
     .badge.acquirente { background: var(--blue-dark); }
 
-    /* CARD */
     .card {
       background: #fff;
       border-radius: 12px;
@@ -144,12 +239,7 @@
       margin-bottom: 4px;
     }
 
-    .card-title {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-    }
-
+    .card-title { font-size: 15px; font-weight: 600; letter-spacing: 0.2px; }
     .card-title.venditore { color: var(--green-dark); }
     .card-title.acquirente { color: var(--blue-dark); }
 
@@ -165,7 +255,6 @@
     .tag.venditore { color: var(--green); background: rgba(76,175,125,0.12); }
     .tag.acquirente { color: var(--blue); background: rgba(74,140,196,0.12); }
 
-    /* CHECK ITEM */
     .check-item {
       display: flex;
       align-items: flex-start;
@@ -194,27 +283,15 @@
       background: transparent;
     }
 
-    .check-item.checked .checkbox {
-      border-color: currentColor;
-      background: currentColor;
-    }
+    .section-entrambi .check-item.checked .checkbox { border-color: var(--gold); background: var(--gold); }
+    .section-venditore .check-item.checked .checkbox { border-color: var(--green); background: var(--green); }
+    .section-acquirente .check-item.checked .checkbox { border-color: var(--blue); background: var(--blue); }
 
-    .check-item .label {
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--text);
-    }
-
-    /* per colorare il checkbox in base alla sezione */
-    .section-entrambi .check-item.checked .checkbox { color: var(--gold); }
-    .section-venditore .check-item.checked .checkbox { color: var(--green); }
-    .section-acquirente .check-item.checked .checkbox { color: var(--blue); }
-
-    /* SVG check */
     .checkmark { display: none; }
     .check-item.checked .checkmark { display: block; }
 
-    /* FOOTER NOTE */
+    .check-item .label { font-size: 14px; line-height: 1.65; color: var(--text); }
+
     .note {
       margin-top: 36px;
       padding: 20px 24px;
@@ -228,224 +305,257 @@
 
     .note span { color: var(--gold); }
 
-    /* RESPONSIVE */
+    /* PROGRESS BAR */
+    .progress-wrap {
+      background: #eee;
+      border-radius: 100px;
+      height: 4px;
+      margin: 0 0 32px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 4px;
+      border-radius: 100px;
+      background: var(--gold);
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    #progress-label {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
     @media (max-width: 480px) {
-      .tab { padding: 14px 18px; font-size: 10px; letter-spacing: 1px; }
+      .tab { padding: 14px 16px; font-size: 10px; letter-spacing: 1px; }
       main { padding: 28px 16px 60px; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="header-eyebrow">Atto Notarile · Compravendita Immobiliare</div>
-  <h1>Documenti per il Rogito</h1>
-  <p>Seleziona il tuo ruolo e spunta i documenti man mano che li raccogli</p>
-</header>
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div>
+    <div style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:4px;color:#666;text-transform:uppercase;margin-bottom:14px;">Atto Notarile · Compravendita</div>
+    <h1>Documenti per il Rogito</h1>
+  </div>
+  <p>Accedi per salvare le tue spunte e ritrovarle ad ogni visita</p>
+  <button class="google-btn" onclick="loginGoogle()">
+    <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+    Accedi con Google
+  </button>
+</div>
 
-<nav>
-  <button class="tab active-entrambi" onclick="switchTab('entrambi', this)">⇄ &nbsp;Entrambi</button>
-  <button class="tab" onclick="switchTab('venditore', this)">→ &nbsp;Venditore</button>
-  <button class="tab" onclick="switchTab('acquirente', this)">← &nbsp;Acquirente</button>
-</nav>
-
-<main>
-
-  <!-- ENTRAMBI -->
-  <section class="section section-entrambi visible" id="section-entrambi">
-    <div class="badge entrambi">
-      <span class="badge-dot" style="background:var(--gold)"></span>
-      Entrambi
+<!-- APP -->
+<div id="app">
+  <header>
+    <div class="header-eyebrow">Atto Notarile · Compravendita Immobiliare</div>
+    <h1>Documenti per il Rogito</h1>
+    <p>Spunta i documenti man mano che li raccogli</p>
+    <div id="user-bar">
+      <img id="user-avatar" src="" alt="avatar" />
+      <span id="user-name"></span>
+      <span id="save-status">✓ salvato</span>
+      <button class="logout-btn" onclick="logoutUser()">Esci</button>
     </div>
-    <div class="card entrambi-card">
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox">
-          <svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span class="label">Documento di identità valido (carta d'identità, passaporto — consigliata anche la patente)</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox">
-          <svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span class="label">Codice fiscale o tessera sanitaria</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox">
-          <svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span class="label">Certificato di stato civile o estratto dell'atto di matrimonio (stato libero, unione civile, separazione, divorzio)</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox">
-          <svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span class="label">Eventuali convenzioni patrimoniali, accordi di convivenza, fondo patrimoniale, atto di separazione dei beni</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox">
-          <svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span class="label">Per cittadini extra UE: permesso o carta di soggiorno</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox">
-          <svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span class="label">Eventuale procura notarile (se qualcuno firma per delega)</span>
-      </div>
-    </div>
-    <div class="note"><span>※ Nota</span> — Questa lista è indicativa. Il notaio incaricato fornirà l'elenco preciso in base alla situazione specifica. In caso di dubbi, contatta direttamente il notaio o l'agenzia immobiliare.</div>
-  </section>
+  </header>
 
-  <!-- VENDITORE -->
-  <section class="section section-venditore" id="section-venditore">
-    <div class="badge venditore">
-      <span class="badge-dot" style="background:var(--green)"></span>
-      Venditore
-    </div>
+  <nav>
+    <button class="tab active-entrambi" onclick="switchTab('entrambi', this)">⇄ &nbsp;Entrambi</button>
+    <button class="tab" onclick="switchTab('venditore', this)">→ &nbsp;Venditore</button>
+    <button class="tab" onclick="switchTab('acquirente', this)">← &nbsp;Acquirente</button>
+  </nav>
 
-    <div class="card venditore">
-      <div class="card-header">
-        <div class="card-title venditore">Documenti dell'immobile</div>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Atto di provenienza (rogito precedente, successione, donazione) con nota di trascrizione</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Visura catastale aggiornata</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Planimetria catastale aggiornata e conforme allo stato di fatto</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Certificato di agibilità/abitabilità (se disponibile)</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Eventuali titoli edilizi: licenza, concessione, permesso di costruire, DIA, SCIA, CILA per lavori eseguiti</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Certificato di destinazione urbanistica (se terreno oltre 5.000 mq o su richiesta)</span>
-      </div>
-    </div>
+  <main>
+    <div id="progress-label">Completamento totale: <span id="progress-count">0 / 0</span></div>
+    <div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
 
-    <div class="card venditore">
-      <div class="card-header">
-        <div class="card-title venditore">APE e certificazioni impianti</div>
-        <span class="tag venditore">⚠️ Obbligatorio</span>
+    <!-- ENTRAMBI -->
+    <section class="section section-entrambi visible" id="section-entrambi">
+      <div class="badge entrambi"><span class="badge-dot" style="background:var(--gold)"></span>Entrambi</div>
+      <div class="card entrambi-card">
+        <div class="check-item" data-id="e1" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Documento di identità valido (carta d'identità, passaporto — consigliata anche la patente)</span></div>
+        <div class="check-item" data-id="e2" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Codice fiscale o tessera sanitaria</span></div>
+        <div class="check-item" data-id="e3" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Certificato di stato civile o estratto dell'atto di matrimonio (stato libero, unione civile, separazione, divorzio)</span></div>
+        <div class="check-item" data-id="e4" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Eventuali convenzioni patrimoniali, accordi di convivenza, fondo patrimoniale, atto di separazione dei beni</span></div>
+        <div class="check-item" data-id="e5" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Per cittadini extra UE: permesso o carta di soggiorno</span></div>
+        <div class="check-item" data-id="e6" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Eventuale procura notarile (se qualcuno firma per delega)</span></div>
       </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Attestato di Prestazione Energetica (APE) in corso di validità — da allegare obbligatoriamente all'atto (valido 10 anni, redatto da tecnico abilitato)</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Dichiarazioni di conformità degli impianti (elettrico, gas, riscaldamento, condizionamento) oppure accordo specifico in atto se non disponibili</span>
-      </div>
-    </div>
+      <div class="note"><span>※ Nota</span> — Lista indicativa. Il notaio fornirà l'elenco preciso per la tua situazione specifica.</div>
+    </section>
 
-    <div class="card venditore">
-      <div class="card-header">
-        <div class="card-title venditore">Documentazione condominiale</div>
-        <span class="tag venditore">Se applicabile</span>
+    <!-- VENDITORE -->
+    <section class="section section-venditore" id="section-venditore">
+      <div class="badge venditore"><span class="badge-dot" style="background:var(--green)"></span>Venditore</div>
+      <div class="card venditore">
+        <div class="card-header"><div class="card-title venditore">Documenti dell'immobile</div></div>
+        <div class="check-item" data-id="v1" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Atto di provenienza (rogito precedente, successione, donazione) con nota di trascrizione</span></div>
+        <div class="check-item" data-id="v2" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Visura catastale aggiornata</span></div>
+        <div class="check-item" data-id="v3" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Planimetria catastale aggiornata e conforme allo stato di fatto</span></div>
+        <div class="check-item" data-id="v4" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Certificato di agibilità/abitabilità (se disponibile)</span></div>
+        <div class="check-item" data-id="v5" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Eventuali titoli edilizi: licenza, concessione, permesso di costruire, DIA, SCIA, CILA per lavori eseguiti</span></div>
+        <div class="check-item" data-id="v6" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Certificato di destinazione urbanistica (se terreno oltre 5.000 mq o su richiesta)</span></div>
       </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Dichiarazione dell'amministratore sullo stato dei pagamenti delle spese condominiali e assenza di morosità</span>
+      <div class="card venditore">
+        <div class="card-header"><div class="card-title venditore">APE e certificazioni impianti</div><span class="tag venditore">⚠️ Obbligatorio</span></div>
+        <div class="check-item" data-id="v7" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Attestato di Prestazione Energetica (APE) in corso di validità — obbligatorio, valido 10 anni, redatto da tecnico abilitato</span></div>
+        <div class="check-item" data-id="v8" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Dichiarazioni di conformità degli impianti (elettrico, gas, riscaldamento, condizionamento) oppure accordo specifico in atto</span></div>
       </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Ultimi verbali assembleari e ripartizione delle spese straordinarie</span>
+      <div class="card venditore">
+        <div class="card-header"><div class="card-title venditore">Documentazione condominiale</div><span class="tag venditore">Se applicabile</span></div>
+        <div class="check-item" data-id="v9" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Dichiarazione dell'amministratore sullo stato dei pagamenti delle spese condominiali e assenza di morosità</span></div>
+        <div class="check-item" data-id="v10" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Ultimi verbali assembleari e ripartizione delle spese straordinarie</span></div>
+        <div class="check-item" data-id="v11" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Eventuale regolamento condominiale</span></div>
       </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Eventuale regolamento condominiale</span>
-      </div>
-    </div>
+      <div class="note"><span>※ Nota</span> — Lista indicativa. Il notaio fornirà l'elenco preciso per la tua situazione specifica.</div>
+    </section>
 
-    <div class="note"><span>※ Nota</span> — Questa lista è indicativa. Il notaio incaricato fornirà l'elenco preciso in base alla situazione specifica. In caso di dubbi, contatta direttamente il notaio o l'agenzia immobiliare.</div>
-  </section>
+    <!-- ACQUIRENTE -->
+    <section class="section section-acquirente" id="section-acquirente">
+      <div class="badge acquirente"><span class="badge-dot" style="background:var(--blue)"></span>Acquirente</div>
+      <div class="card acquirente">
+        <div class="card-header"><div class="card-title acquirente">Documenti personali</div></div>
+        <div class="check-item" data-id="a1" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Documento di identità valido (carta d'identità, passaporto — consigliata anche la patente)</span></div>
+        <div class="check-item" data-id="a2" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Codice fiscale o tessera sanitaria</span></div>
+        <div class="check-item" data-id="a3" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Certificato di stato civile / documentazione matrimoniale o familiare</span></div>
+        <div class="check-item" data-id="a4" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Per cittadini extra UE: permesso o carta di soggiorno</span></div>
+        <div class="check-item" data-id="a5" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Eventuale procura notarile (se qualcuno firma per delega)</span></div>
+      </div>
+      <div class="card acquirente">
+        <div class="card-header"><div class="card-title acquirente">Documentazione mutuo</div><span class="tag acquirente">Se acquisto con mutuo</span></div>
+        <div class="check-item" data-id="a6" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Delibera di concessione del mutuo dalla banca</span></div>
+        <div class="check-item" data-id="a7" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Piano di ammortamento del mutuo</span></div>
+        <div class="check-item" data-id="a8" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Polizza incendio e scoppio obbligatoria sull'immobile (richiesta dalla banca)</span></div>
+        <div class="check-item" data-id="a9" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Eventuali moduli bancari aggiuntivi, quietanze, coordinate per l'accredito al venditore</span></div>
+      </div>
+      <div class="note"><span>※ Nota</span> — Lista indicativa. Il notaio fornirà l'elenco preciso per la tua situazione specifica.</div>
+    </section>
+  </main>
+</div>
 
-  <!-- ACQUIRENTE -->
-  <section class="section section-acquirente" id="section-acquirente">
-    <div class="badge acquirente">
-      <span class="badge-dot" style="background:var(--blue)"></span>
-      Acquirente
-    </div>
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    <div class="card acquirente">
-      <div class="card-header">
-        <div class="card-title acquirente">Documenti personali</div>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Documento di identità valido (carta d'identità, passaporto — consigliata anche la patente)</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Codice fiscale o tessera sanitaria</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Certificato di stato civile / documentazione matrimoniale o familiare (vedi sezione "Entrambi")</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Per cittadini extra UE: permesso o carta di soggiorno</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Eventuale procura notarile (se qualcuno firma per delega)</span>
-      </div>
-    </div>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBYhq-_QtTNTN-9VlAiHyRpbgsfokiiqmw",
+    authDomain: "acquisto-casa.firebaseapp.com",
+    projectId: "acquisto-casa",
+    storageBucket: "acquisto-casa.firebasestorage.app",
+    messagingSenderId: "388374050359",
+    appId: "1:388374050359:web:aa64fb5e5d4faa8aff71b2",
+    measurementId: "G-7TJEKP3YHX"
+  };
 
-    <div class="card acquirente">
-      <div class="card-header">
-        <div class="card-title acquirente">Documentazione mutuo</div>
-        <span class="tag acquirente">Se acquisto con mutuo</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Delibera di concessione del mutuo dalla banca</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Piano di ammortamento del mutuo</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Polizza incendio e scoppio obbligatoria sull'immobile (richiesta dalla banca)</span>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="label">Eventuali moduli bancari aggiuntivi, quietanze, coordinate per l'accredito al venditore</span>
-      </div>
-    </div>
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const provider = new GoogleAuthProvider();
 
-    <div class="note"><span>※ Nota</span> — Questa lista è indicativa. Il notaio incaricato fornirà l'elenco preciso in base alla situazione specifica. In caso di dubbi, contatta direttamente il notaio o l'agenzia immobiliare.</div>
-  </section>
+  let currentUser = null;
+  let saveTimer = null;
 
-</main>
+  // LOGIN
+  window.loginGoogle = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (e) {
+      console.error("Login error", e);
+    }
+  };
 
-<script>
-  function switchTab(name, btn) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
-    document.getElementById('section-' + name).classList.add('visible');
-    document.querySelectorAll('.tab').forEach(t => {
-      t.className = 'tab';
-    });
-    btn.classList.add('active-' + name);
+  // LOGOUT
+  window.logoutUser = async () => {
+    await signOut(auth);
+  };
+
+  // AUTH STATE
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      currentUser = user;
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("app").style.display = "block";
+      document.getElementById("user-name").textContent = user.displayName;
+      document.getElementById("user-avatar").src = user.photoURL;
+      await loadChecks(user.uid);
+      updateProgress();
+    } else {
+      currentUser = null;
+      document.getElementById("login-screen").style.display = "flex";
+      document.getElementById("app").style.display = "none";
+    }
+  });
+
+  // LOAD from Firestore
+  async function loadChecks(uid) {
+    const ref = doc(db, "users", uid);
+    const snap = await getDoc(ref);
+    if (snap.exists()) {
+      const data = snap.data().checks || {};
+      document.querySelectorAll(".check-item").forEach(item => {
+        const id = item.dataset.id;
+        if (data[id]) item.classList.add("checked");
+        else item.classList.remove("checked");
+      });
+    }
   }
 
-  function toggleCheck(item) {
-    item.classList.toggle('checked');
+  // SAVE to Firestore (debounced)
+  function saveChecks() {
+    if (!currentUser) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(async () => {
+      const checks = {};
+      document.querySelectorAll(".check-item").forEach(item => {
+        checks[item.dataset.id] = item.classList.contains("checked");
+      });
+      const ref = doc(db, "users", currentUser.uid);
+      await setDoc(ref, { checks }, { merge: true });
+      // Show save indicator
+      const status = document.getElementById("save-status");
+      status.classList.add("visible");
+      setTimeout(() => status.classList.remove("visible"), 2000);
+    }, 600);
   }
+
+  // TOGGLE CHECK
+  window.toggleCheck = (item) => {
+    item.classList.toggle("checked");
+    updateProgress();
+    saveChecks();
+  };
+
+  // PROGRESS
+  window.updateProgress = () => {
+    const all = document.querySelectorAll(".check-item");
+    const done = document.querySelectorAll(".check-item.checked");
+    const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
+    document.getElementById("progress-bar").style.width = pct + "%";
+    document.getElementById("progress-count").textContent = `${done.length} / ${all.length}`;
+
+    // change bar color near completion
+    const bar = document.getElementById("progress-bar");
+    if (pct === 100) bar.style.background = "var(--green)";
+    else if (pct >= 60) bar.style.background = "var(--gold)";
+    else bar.style.background = "var(--gold)";
+  };
+
+  // TAB SWITCH
+  window.switchTab = (name, btn) => {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("visible"));
+    document.getElementById("section-" + name).classList.add("visible");
+    document.querySelectorAll(".tab").forEach(t => { t.className = "tab"; });
+    btn.classList.add("active-" + name);
+  };
 </script>
 
 </body>
