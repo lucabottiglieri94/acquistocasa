@@ -152,7 +152,6 @@
         radial-gradient(ellipse 50% 50% at 50% 80%, rgba(122,158,126,0.05) 0%, transparent 60%);
     }
 
-    /* Grid texture */
     .hero-bg::after {
       content: '';
       position: absolute;
@@ -363,6 +362,48 @@
 
     .google-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,0,0,0.2); }
     .google-btn svg { width: 20px; height: 20px; }
+
+    /* Access denied */
+    #access-denied {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      gap: 20px;
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    #access-denied h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--dark);
+      font-weight: 400;
+    }
+
+    #access-denied p {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 320px;
+      line-height: 1.7;
+    }
+
+    .denied-icon { font-size: 48px; }
+
+    .btn-logout-denied {
+      background: none;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-logout-denied:hover { border-color: var(--muted); color: var(--text); }
 
     /* Checklist content */
     #checklist-content { display: none; }
@@ -1018,7 +1059,15 @@
     </button>
   </div>
 
-  <!-- Checklist content (shown when logged in) -->
+  <!-- Accesso negato -->
+  <div id="access-denied">
+    <span class="denied-icon">🔒</span>
+    <h2>Accesso riservato</h2>
+    <p>Questo spazio è privato. Solo gli account autorizzati possono accedere.</p>
+    <button class="btn-logout-denied" onclick="logoutUser()">Esci e cambia account</button>
+  </div>
+
+  <!-- Checklist content (shown when logged in and authorized) -->
   <div id="checklist-content">
     <div id="user-bar">
       <img id="user-avatar-bar" src="" alt="" />
@@ -1324,6 +1373,15 @@
     appId: "1:388374050359:web:aa64fb5e5d4faa8aff71b2"
   };
 
+  // ══════════════════════════════════════════════════
+  // ⚠️  INSERISCI QUI LE EMAIL DEI DUE ACCOUNT GOOGLE
+  // ══════════════════════════════════════════════════
+  const AUTHORIZED_EMAILS = [
+    "tua.email@gmail.com",       // ← sostituisci con la tua email
+    "email.partner@gmail.com"    // ← sostituisci con l'email del partner
+  ];
+  // ══════════════════════════════════════════════════
+
   const fbApp = initializeApp(firebaseConfig);
   const auth = getAuth(fbApp);
   const db = getFirestore(fbApp);
@@ -1332,7 +1390,6 @@
   let currentUser = null;
   let saveTimer = null;
 
-  // ── Global state (in-memory, synced to Firestore) ──
   window._appData = { checks: {}, budget: [], contacts: [] };
 
   // ── Auth ──
@@ -1345,28 +1402,44 @@
 
   onAuthStateChanged(auth, async (user) => {
     currentUser = user;
+
     if (user) {
-      // Navbar
+      // Controlla se l'email è autorizzata
+      const isAuthorized = AUTHORIZED_EMAILS.includes(user.email);
+
+      // Navbar sempre aggiornata
       document.getElementById('nav-avatar').src = user.photoURL;
       document.getElementById('nav-avatar').style.display = 'block';
       document.getElementById('nav-login-btn').style.display = 'none';
       document.getElementById('nav-logout-btn').style.display = 'block';
-      // User bar
+
+      if (!isAuthorized) {
+        // Mostra schermata accesso negato
+        document.getElementById('login-wall').style.display = 'none';
+        document.getElementById('access-denied').style.display = 'flex';
+        document.getElementById('checklist-content').style.display = 'none';
+        return;
+      }
+
+      // Utente autorizzato: mostra contenuto
+      document.getElementById('login-wall').style.display = 'none';
+      document.getElementById('access-denied').style.display = 'none';
+      document.getElementById('checklist-content').style.display = 'block';
       document.getElementById('user-avatar-bar').src = user.photoURL;
       document.getElementById('user-name-bar').textContent = user.displayName;
-      // Show checklist
-      document.getElementById('login-wall').style.display = 'none';
-      document.getElementById('checklist-content').style.display = 'block';
-      // Load data
+
       await loadData(user.uid);
       renderBudget();
       renderContacts();
       updateProgress();
+
     } else {
+      // Non loggato
       document.getElementById('nav-avatar').style.display = 'none';
       document.getElementById('nav-login-btn').style.display = 'block';
       document.getElementById('nav-logout-btn').style.display = 'none';
       document.getElementById('login-wall').style.display = 'flex';
+      document.getElementById('access-denied').style.display = 'none';
       document.getElementById('checklist-content').style.display = 'none';
     }
   });
@@ -1380,7 +1453,6 @@
       window._appData.checks = d.checks || {};
       window._appData.budget = d.budget || [];
       window._appData.contacts = d.contacts || [];
-      // Apply checks
       document.querySelectorAll('.check-item').forEach(item => {
         if (window._appData.checks[item.dataset.id]) item.classList.add('checked');
         else item.classList.remove('checked');
@@ -1522,7 +1594,6 @@
     window.scrollTo(0, 0);
   };
 
-  // Close modals on overlay click
   document.querySelectorAll('.modal-overlay').forEach(o => {
     o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
   });
