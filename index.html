@@ -7,6 +7,118 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+          <!-- ENTRAMBI -->
+      <div class="c-section c-section-e visible" id="c-section-e">
+        <div class="c-card">
+          <div class="check-item" data-id="e1" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Documento di identità valido (carta d'identità, passaporto — consigliata anche la patente)</span></div>
+          <div class="check-item" data-id="e2" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Codice fiscale o tessera sanitaria</span></div>
+          <div class="check-item" data-id="e3" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Certificato di stato civile o estratto dell'atto di matrimonio (stato libero, unione civile, separazione, divorzio)</span></div>
+          <div class="check-item" data-id="e4" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Eventuali convenzioni patrimoniali, accordi di convivenza, fondo patrimoniale, atto di separazione dei beni</span></div>
+          <div class="check-item" data-id="e5" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Per cittadini extra UE: permesso o carta di soggiorno</span></div>
+          <div class="check-item" data-id="e6" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Eventuale procura notarile (se qualcuno firma per delega)</span></div>
+        </div>
+        <div class="c-note"><strong>※ Nota</strong> — Lista indicativa. Il notaio incaricato fornirà l'elenco preciso per la tua situazione.</div>
+      </div>
+
+      <!-- VENDITORE -->
+      <div class="c-section c-section-v" id="c-section-v">
+        <div class="c-card v">
+          <div class="c-card-header"><div class="c-card-title v">Documenti dell'immobile</div></div>
+          <div class="check-item" data-id="v1" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Atto di provenienza (rogito precedente, successione, donazione) con nota di trascrizione</span></div>
+          <div class="check-item" data-id="v2" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Visura catastale aggiornata</span></div>
+          <div class="check-item" data-id="v3" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Planimetria catastale aggiornata e conforme allo stato di fatto</span></div>
+          <div class="check-item" data-id="v4" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Certificato di agibilità/abitabilità (se disponibile)</span></div>
+          <div class="check-item" data-id="v5" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Eventuali titoli edilizi: licenza, concessione, permesso di costruire, DIA, SCIA, CILA per lavori eseguiti</span></div>
+          <div class="check-item" data-id="v6" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Certificato di destinazione urbanistica (se terreno oltre 5.000 mq o su richiesta)</span></div>
+        </div>
+        <div class="c-card v">
+          <div class="c-card-header"><div class="c-card-title v">APE e certificazioni impianti</div><span class="c-tag v">⚠️ Obbligatorio</span></div>
+          <div class="check-item" data-id="v7" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Attestato di Prestazione Energetica (APE) in corso di validità — obbligatorio, valido 10 anni, redatto da tecnico abilitato</span></div>
+          <div class="check-item" data-id="v8" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Dichiarazioni di conformità degli impianti (elettrico, gas, riscaldamento, condizionamento)</span></div>
+        </div>
+        <div class="c-card v">
+          <div class="c-card-header"><div class="c-card-title v">Documentazione condominiale</div><span class="c-tag v">Se applicabile</span></div>
+          <div class="check-item" data-id="v9" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Dichiarazione dell'amministratore sullo stato dei pagamenti delle spese condominiali e assenza di morosità</span></div>
+          <div class="check-item" data-id="v10" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Ultimi verbali assembleari e ripartizione delle spese straordinarie</span></div>
+          <div class="check-item" data-id="v11" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Eventuale regolamento condominiale</span></div>
+        </div>
+        <div class="c-note"><strong>※ Nota</strong> — Lista indicativa. Il notaio incaricato fornirà l'elenco preciso per la tua situazione.</div>
+      </div>
+
+      <!-- ACQUIRENTE -->
+      <div class="c-section c-section-a" id="c-section-a">
+        <div class="c-card a">
+          <div class="c-card-header"><div class="c-card-title a">Documenti personali</div></div>
+          <div class="check-item" data-id="a1" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Documento di identità valido (carta d'identità, passaporto)</span></div>
+          <div class="check-item" data-id="a2" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Codice fiscale o tessera sanitaria</span></div>
+          <div class="check-item" data-id="a3" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Certificato di stato civile / documentazione matrimoniale o familiare</span></div>
+          <div class="check-item" data-id="a4" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Per cittadini extra UE: permesso o carta di soggiorno</span></div>
+          <div class="check-item" data-id="a5" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Eventuale procura notarile (se qualcuno firma per delega)</span></div>
+        </div>
+        <div class="c-card a">
+          <div class="c-card-header"><div class="c-card-title a">Documentazione mutuo</div><span class="c-tag a">Se acquisto con mutuo</span></div>
+          <div class="check-item" data-id="a6" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Delibera di concessione del mutuo dalla banca</span></div>
+          <div class="check-item" data-id="a7" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Piano di ammortamento del mutuo</span></div>
+          <div class="check-item" data-id="a8" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Polizza incendio e scoppio obbligatoria sull'immobile (richiesta dalla banca)</span></div>
+          <div class="check-item" data-id="a9" onclick="toggleCheck(this)"><div class="checkbox"><svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="check-label">Eventuali moduli bancari aggiuntivi, quietanze, coordinate per l'accredito al venditore</span></div>
+        </div>
+        <div class="c-note"><strong>※ Nota</strong> — Lista indicativa. Il notaio incaricato fornirà l'elenco preciso per la tua situazione.</div>
+      </div>
+    </div>
+  </div>
+</div>
+   .c-section .c-card {
+  background: #2a2e32;
+  border-radius: 16px;
+  padding: 24px 24px 20px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #ffffff;
+}
+
+.c-card-title,
+.check-label,
+.c-note {
+  color: rgba(255,255,255,0.9);
+}
+
+.c-note strong {
+  color: #ffffff;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(255,255,255,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.c-section-e .check-item.checked .checkbox {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.c-section-v .check-item.checked .checkbox {
+  background: var(--sage);
+  border-color: var(--sage);
+}
+
+.c-section-a .check-item.checked .checkbox {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+.c-section .check-item.checked .check-label {
+  color: #ffffff;
+  opacity: 1;
+}  
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -1194,6 +1306,60 @@ body {
     </div>
   </div>
 </div>
+  
+ .c-section .c-card {
+  background: #2a2e32;
+  border-radius: 16px;
+  padding: 24px 24px 20px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #ffffff;
+}
+
+.c-card-title,
+.check-label,
+.c-note {
+  color: rgba(255,255,255,0.9);
+}
+
+.c-note strong {
+  color: #ffffff;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(255,255,255,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.c-section-e .check-item.checked .checkbox {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.c-section-v .check-item.checked .checkbox {
+  background: var(--sage);
+  border-color: var(--sage);
+}
+
+.c-section-a .check-item.checked .checkbox {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+.c-section .check-item.checked .check-label {
+  color: #ffffff;
+  opacity: 1;
+}  
+
 
 <!-- ═══ RENDERING ═══ -->
 <div class="page" id="page-rendering">
