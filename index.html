@@ -850,47 +850,113 @@ body {
     .upload-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
     .upload-btn.disabled { opacity: 0.3; pointer-events: none; }
 
-    /* ─── ROOM CARD with photo stack ─── */
+    /* ─── ROOM CARD with photo fan ─── */
     .room-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      overflow: hidden;
+      overflow: visible;
       box-shadow: 0 4px 24px rgba(0,0,0,0.3);
       transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
+      position: relative;
     }
 
-    .room-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+    .room-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
 
     .room-thumb-area {
       height: 220px;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
+      border-radius: 20px 20px 0 0;
     }
 
-    /* Photo stack effect */
+    /* Photo fan stack */
     .room-stack {
       position: absolute;
       inset: 0;
+      border-radius: 14px 14px 0 0;
+      overflow: visible;
     }
 
     .room-stack-img {
       position: absolute;
-      width: 88%;
-      height: 88%;
+      width: 82%;
+      height: 82%;
       object-fit: cover;
       border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      transition: all 0.4s ease;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.55);
+      transition: all 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      transform-origin: bottom center;
     }
 
-    .room-stack-img:nth-child(1) { bottom: 6%; right: 4%; z-index: 3; }
-    .room-stack-img:nth-child(2) { bottom: 10%; right: 8%; z-index: 2; opacity: 0.7; transform: rotate(-3deg); }
-    .room-stack-img:nth-child(3) { bottom: 14%; right: 12%; z-index: 1; opacity: 0.4; transform: rotate(-7deg); }
+    /* Default stacked state — all on top of each other */
+    .room-stack-img:nth-child(1) {
+      bottom: 6%; left: 50%; transform: translateX(-50%) rotate(0deg);
+      z-index: 3;
+    }
+    .room-stack-img:nth-child(2) {
+      bottom: 6%; left: 50%; transform: translateX(-50%) rotate(-5deg);
+      z-index: 2; opacity: 0.75;
+    }
+    .room-stack-img:nth-child(3) {
+      bottom: 6%; left: 50%; transform: translateX(-50%) rotate(5deg);
+      z-index: 1; opacity: 0.5;
+    }
 
-    .room-card:hover .room-stack-img:nth-child(2) { transform: rotate(-1deg) translateX(-4px); opacity: 0.85; }
-    .room-card:hover .room-stack-img:nth-child(3) { transform: rotate(-3deg) translateX(-8px); opacity: 0.6; }
+    /* Fan open on hover — spread like cards */
+    .room-card:hover .room-stack-img:nth-child(1) {
+      transform: translateX(-50%) rotate(0deg) translateY(-8px);
+      opacity: 1; z-index: 3;
+    }
+    .room-card:hover .room-stack-img:nth-child(2) {
+      transform: translateX(calc(-50% - 70px)) rotate(-20deg) translateY(4px);
+      opacity: 1; z-index: 2;
+    }
+    .room-card:hover .room-stack-img:nth-child(3) {
+      transform: translateX(calc(-50% + 70px)) rotate(20deg) translateY(4px);
+      opacity: 1; z-index: 2;
+    }
+
+    /* On hover each photo gets a glow + lift when individually hovered */
+    .room-stack-img:hover {
+      z-index: 10 !important;
+      box-shadow: 0 12px 40px rgba(201,168,76,0.35), 0 6px 24px rgba(0,0,0,0.7) !important;
+      transform: translateX(-50%) rotate(0deg) translateY(-18px) scale(1.06) !important;
+    }
+    .room-card:hover .room-stack-img:nth-child(2):hover {
+      transform: translateX(calc(-50% - 70px)) rotate(-20deg) translateY(-16px) scale(1.08) !important;
+    }
+    .room-card:hover .room-stack-img:nth-child(3):hover {
+      transform: translateX(calc(-50% + 70px)) rotate(20deg) translateY(-16px) scale(1.08) !important;
+    }
+
+    /* hint overlay on hover */
+    .room-stack-hint {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 12px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 20;
+      pointer-events: none;
+      border-radius: 14px 14px 0 0;
+    }
+    .room-card:hover .room-stack-hint { opacity: 1; }
+    .room-stack-hint span {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.6);
+      background: rgba(0,0,0,0.5);
+      padding: 4px 10px;
+      border-radius: 100px;
+      backdrop-filter: blur(4px);
+    }
 
     /* Lightbox */
     #lightbox {
@@ -902,29 +968,36 @@ body {
       align-items: center;
       justify-content: center;
       padding: 24px;
+      backdrop-filter: blur(6px);
     }
     #lightbox.open { display: flex; }
     #lightbox img {
       max-width: 90vw;
       max-height: 85vh;
-      border-radius: 12px;
+      border-radius: 14px;
       object-fit: contain;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+      box-shadow: 0 32px 100px rgba(0,0,0,0.9);
+      animation: lbPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes lbPop {
+      from { opacity: 0; transform: scale(0.82) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
     }
     #lightbox-close {
       position: absolute;
       top: 20px; right: 24px;
-      background: none;
+      background: rgba(255,255,255,0.1);
       border: 1px solid rgba(255,255,255,0.2);
       color: #fff;
-      width: 36px; height: 36px;
+      width: 40px; height: 40px;
       border-radius: 50%;
       font-size: 18px;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: all 0.2s;
+      backdrop-filter: blur(4px);
     }
-    #lightbox-close:hover { background: rgba(255,255,255,0.1); }
+    #lightbox-close:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
 
     /* ─── BUDGET ─── */
     #page-budget { background: transparent; }
@@ -1857,14 +1930,25 @@ body {
       const newPhotos = roomData.new || [];
       const hasPhotos = newPhotos.length > 0;
 
-      const stackHtml = hasPhotos
-        ? `<div class="room-stack">
-            ${newPhotos.slice(0,3).map(src => `<img class="room-stack-img" src="${src}" alt="" />`).join('')}
-           </div>`
-        : `<div class="room-placeholder" style="--bg1:${room.bg1};--bg2:${room.bg2};">
+      let stackHtml;
+      if (hasPhotos) {
+        // Each image clickable independently — stop propagation so card click (openRoom) doesn't fire
+        const imgs = newPhotos.slice(0, 3).map((src, i) =>
+          `<img class="room-stack-img" src="${src}" alt=""
+            onclick="event.stopPropagation(); openLightbox('${src}')"
+            title="Clicca per aprire" />`
+        ).join('');
+        // hint only if >1 photo
+        const hint = newPhotos.length > 1
+          ? `<div class="room-stack-hint"><span>Apri a ventaglio</span></div>`
+          : '';
+        stackHtml = `<div class="room-stack">${imgs}${hint}</div>`;
+      } else {
+        stackHtml = `<div class="room-placeholder" style="--bg1:${room.bg1};--bg2:${room.bg2};">
              <span class="room-placeholder-icon">${room.icon}</span>
              <span class="room-placeholder-text">Nessuna foto</span>
            </div>`;
+      }
 
       const totalPhotos = (roomData.old || []).length + newPhotos.length;
       const badgeHtml = totalPhotos > 0
