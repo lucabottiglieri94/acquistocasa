@@ -511,7 +511,7 @@ body {
 
     /* Cards */
     .c-card {
-      background: var(--white);
+      background: trasparent;
       border-radius: 16px;
       padding: 0 28px 12px;
       box-shadow: 0 2px 16px rgba(0,0,0,0.05);
@@ -631,7 +631,7 @@ body {
     }
 
     .room-card {
-      background: var(--white);
+      background: trasparent;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 4px 24px rgba(0,0,0,0.06);
@@ -711,12 +711,22 @@ body {
       margin-bottom: 40px;
     }
 
-    .budget-stat {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 24px 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    }
+    ..budget-stat {
+  background: #2a2e32 !important;  /* grigio card visibile sul dark body */
+  color: #ffffff !important;       /* testo sempre bianco */
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);  /* ombra più forte per pop */
+  border: 1px solid rgba(255,255,255,0.15); /* bordo sottile */
+  font-weight: 700;
+  font-size: 1.2em;
+  text-align: center;
+  min-height: 60px;  /* square proporzionato */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
     .budget-stat-label {
       font-size: 10px;
@@ -735,13 +745,22 @@ body {
     .budget-stat-value.positive { color: var(--sage); }
     .budget-stat-value.negative { color: var(--terracotta); }
 
-    .budget-table {
-      background: var(--white);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
-      margin-bottom: 24px;
-    }
+   .budget-table {
+  background: #2a2e32 !important;  /* stesso grigio dello stat */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  margin-bottom: 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #ffffff;  /* testo tabella bianco */
+}
+
+.budget-table th,
+.budget-table td {
+  color: #ffffff !important;  /* celle leggibili */
+  border-color: rgba(255,255,255,0.15);
+}
+
 
     .budget-table-header {
       display: grid;
@@ -811,14 +830,22 @@ body {
 
     .modal-overlay.open { display: flex; }
 
-    .modal {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 36px;
-      width: 100%;
-      max-width: 440px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.2);
-    }
+.modal {
+  background: #2a2e32 !important;  /* grigio uniforme dark */
+  border-radius: 20px;
+  padding: 36px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);  /* ombra più dark */
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #ffffff !important;  /* testo modale bianco */
+}
+
+.modal h3,
+.modal p,
+.modal label {
+  color: #ffffff !important;  /* titoli e testi visibili */
+}
 
     .modal h3 {
       font-family: 'Playfair Display', serif;
@@ -894,13 +921,21 @@ body {
 
     .contacts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-bottom: 32px; }
 
-    .contact-card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
-      position: relative;
-    }
+   .contact-card {
+  background: #2a2e32 !important;  /* grigio dark coerente */
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #ffffff !important;  /* testi card bianchi */
+}
+
+.contact-card h3,
+.contact-card p,
+.contact-card a {
+  color: #ffffff !important;  /* titoli/link visibili */
+}
 
     .contact-role {
       font-size: 10px;
