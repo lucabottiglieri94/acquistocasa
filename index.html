@@ -636,17 +636,7 @@ body {
       gap: 24px;
     }
 
-    .room-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .room-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
-
+    /* room placeholder kept for non-photo state */
     .room-placeholder {
       height: 220px;
       display: flex;
@@ -672,7 +662,7 @@ body {
       font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(44,44,40,0.4);
+      color: rgba(44,44,40,0.5);
       position: relative;
       z-index: 1;
     }
@@ -705,6 +695,236 @@ body {
       background: rgba(201,168,76,0.1);
       color: var(--gold);
     }
+
+    /* ─── ROOM DETAIL PAGE ─── */
+    #page-room-detail { background: #1A1A18; min-height: 100vh; }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(245,240,232,0.55);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      padding: 7px 14px;
+      border-radius: 100px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: all 0.2s;
+    }
+    .back-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    .room-detail-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 760px) {
+      .room-detail-main { grid-template-columns: 1fr; }
+    }
+
+    .room-style-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    .room-style-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .room-style-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.4);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .room-style-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+
+    .room-style-sub {
+      font-size: 12px;
+      color: rgba(245,240,232,0.4);
+      font-weight: 400;
+    }
+
+    .room-photo-count {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--gold);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      min-height: 120px;
+      margin-bottom: 16px;
+    }
+
+    .photo-thumb {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .photo-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .photo-thumb:hover img { transform: scale(1.05); }
+
+    .photo-thumb-del {
+      position: absolute;
+      top: 5px; right: 5px;
+      width: 22px; height: 22px;
+      background: rgba(0,0,0,0.7);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .photo-thumb:hover .photo-thumb-del { opacity: 1; }
+
+    .photo-empty-slot {
+      border-radius: 10px;
+      aspect-ratio: 1;
+      background: rgba(255,255,255,0.02);
+      border: 1.5px dashed rgba(255,255,255,0.08);
+    }
+
+    .upload-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: none;
+      border: 1.5px dashed rgba(255,255,255,0.15);
+      padding: 12px 20px;
+      width: 100%;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: rgba(245,240,232,0.4);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .upload-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+    .upload-btn.disabled { opacity: 0.3; pointer-events: none; }
+
+    /* ─── ROOM CARD with photo stack ─── */
+    .room-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .room-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+
+    .room-thumb-area {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Photo stack effect */
+    .room-stack {
+      position: absolute;
+      inset: 0;
+    }
+
+    .room-stack-img {
+      position: absolute;
+      width: 88%;
+      height: 88%;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: all 0.4s ease;
+    }
+
+    .room-stack-img:nth-child(1) { bottom: 6%; right: 4%; z-index: 3; }
+    .room-stack-img:nth-child(2) { bottom: 10%; right: 8%; z-index: 2; opacity: 0.7; transform: rotate(-3deg); }
+    .room-stack-img:nth-child(3) { bottom: 14%; right: 12%; z-index: 1; opacity: 0.4; transform: rotate(-7deg); }
+
+    .room-card:hover .room-stack-img:nth-child(2) { transform: rotate(-1deg) translateX(-4px); opacity: 0.85; }
+    .room-card:hover .room-stack-img:nth-child(3) { transform: rotate(-3deg) translateX(-8px); opacity: 0.6; }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    #lightbox-close:hover { background: rgba(255,255,255,0.1); }
 
     /* ─── BUDGET ─── */
     #page-budget { background: transparent; }
@@ -1204,80 +1424,58 @@ body {
   <div class="section-hero">
     <span class="section-hero-tag">Sezione 02</span>
     <h1 class="section-hero-title">Rendering & Ispirazione</h1>
-    <p class="section-hero-sub">Foto e idee di design divise per stanza — prossimamente</p>
+    <p class="section-hero-sub">Clicca su una stanza per aggiungere foto nei due stili</p>
   </div>
   <div class="rooms-grid">
     <div class="rooms-intro">
       <h2>Le stanze della nostra casa</h2>
-      <p>Carica foto, rendering e ispirazioni per ogni ambiente</p>
+      <p>Carica fino a 3 foto per stile — vecchio e nuovo — per ogni ambiente</p>
     </div>
-    <div class="rooms-list">
-      <div class="room-card">
-        <div class="room-placeholder" style="--bg1:#E8DDD0;--bg2:#D4C4B0;">
-          <span class="room-placeholder-icon">🛋️</span>
-          <span class="room-placeholder-text">Foto in arrivo</span>
+    <div class="rooms-list" id="rooms-list"></div>
+  </div>
+</div>
+
+<!-- ═══ ROOM DETAIL ═══ -->
+<div class="page" id="page-room-detail">
+  <div class="section-hero" id="room-detail-hero">
+    <button class="back-btn" onclick="showPage('rendering')">← Torna alle stanze</button>
+    <span class="section-hero-tag" id="room-detail-tag">Sezione 02</span>
+    <h1 class="section-hero-title" id="room-detail-title">Soggiorno</h1>
+    <p class="section-hero-sub" id="room-detail-sub">Zona living, divano, zona TV, libreria</p>
+  </div>
+  <div class="room-detail-main">
+    <!-- VECCHIO STILE -->
+    <div class="room-style-section">
+      <div class="room-style-header">
+        <div>
+          <div class="room-style-label">Stile Attuale</div>
+          <div class="room-style-title">Vecchio Stile</div>
+          <div class="room-style-sub">Come è adesso — riferimento di partenza</div>
         </div>
-        <div class="room-info">
-          <div class="room-name">Soggiorno</div>
-          <div class="room-desc">Zona living, divano, zona TV, libreria</div>
-          <span class="room-badge">Prossimamente</span>
-        </div>
+        <div class="room-photo-count" id="count-old">0 / 3</div>
       </div>
-      <div class="room-card">
-        <div class="room-placeholder" style="--bg1:#D8E0D0;--bg2:#C4D0BC;">
-          <span class="room-placeholder-icon">🍳</span>
-          <span class="room-placeholder-text">Foto in arrivo</span>
+      <div class="photo-grid" id="grid-old"></div>
+      <label class="upload-btn" id="upload-btn-old">
+        <input type="file" accept="image/*" multiple id="input-old" style="display:none" onchange="handleUpload(event,'old')" />
+        <span>＋</span> Aggiungi foto
+      </label>
+    </div>
+
+    <!-- NUOVO STILE -->
+    <div class="room-style-section">
+      <div class="room-style-header">
+        <div>
+          <div class="room-style-label" style="color:var(--gold)">Stile Desiderato</div>
+          <div class="room-style-title">Nuovo Stile</div>
+          <div class="room-style-sub">Ispirazioni e rendering del futuro look</div>
         </div>
-        <div class="room-info">
-          <div class="room-name">Cucina</div>
-          <div class="room-desc">Cucina, zona cottura, dispensa</div>
-          <span class="room-badge">Prossimamente</span>
-        </div>
+        <div class="room-photo-count" id="count-new">0 / 3</div>
       </div>
-      <div class="room-card">
-        <div class="room-placeholder" style="--bg1:#D8D4E4;--bg2:#C4BEDD;">
-          <span class="room-placeholder-icon">🛏️</span>
-          <span class="room-placeholder-text">Foto in arrivo</span>
-        </div>
-        <div class="room-info">
-          <div class="room-name">Camera da letto</div>
-          <div class="room-desc">Letto matrimoniale, armadio, comodini</div>
-          <span class="room-badge">Prossimamente</span>
-        </div>
-      </div>
-      <div class="room-card">
-        <div class="room-placeholder" style="--bg1:#D0DCE8;--bg2:#BCC8D4;">
-          <span class="room-placeholder-icon">🚿</span>
-          <span class="room-placeholder-text">Foto in arrivo</span>
-        </div>
-        <div class="room-info">
-          <div class="room-name">Bagno</div>
-          <div class="room-desc">Sanitari, doccia, piastrelle, arredo</div>
-          <span class="room-badge">Prossimamente</span>
-        </div>
-      </div>
-      <div class="room-card">
-        <div class="room-placeholder" style="--bg1:#E4DDD0;--bg2:#D4CAB8;">
-          <span class="room-placeholder-icon">📚</span>
-          <span class="room-placeholder-text">Foto in arrivo</span>
-        </div>
-        <div class="room-info">
-          <div class="room-name">Studio</div>
-          <div class="room-desc">Scrivania, libreria, zona lavoro</div>
-          <span class="room-badge">Prossimamente</span>
-        </div>
-      </div>
-      <div class="room-card">
-        <div class="room-placeholder" style="--bg1:#DCE4D8;--bg2:#C8D4C4;">
-          <span class="room-placeholder-icon">🌿</span>
-          <span class="room-placeholder-text">Foto in arrivo</span>
-        </div>
-        <div class="room-info">
-          <div class="room-name">Terrazzo / Giardino</div>
-          <div class="room-desc">Spazio esterno, piante, arredo outdoor</div>
-          <span class="room-badge">Prossimamente</span>
-        </div>
-      </div>
+      <div class="photo-grid" id="grid-new"></div>
+      <label class="upload-btn" id="upload-btn-new">
+        <input type="file" accept="image/*" multiple id="input-new" style="display:none" onchange="handleUpload(event,'new')" />
+        <span>＋</span> Aggiungi foto
+      </label>
     </div>
   </div>
 </div>
@@ -1404,6 +1602,12 @@ body {
   </div>
 </div>
 
+<!-- ═══ LIGHTBOX ═══ -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
 <!-- ═══ FIREBASE ═══ -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -1438,7 +1642,7 @@ body {
   let currentUser = null;
   let saveTimer = null;
 
-  window._appData = { checks: {}, budget: [], contacts: [] };
+  window._appData = { checks: {}, budget: [], contacts: [], rooms: {} };
 
   // ── Auth ──
   window.loginGoogle = async () => {
@@ -1480,6 +1684,7 @@ body {
       renderBudget();
       renderContacts();
       updateProgress();
+      renderRooms();
 
     } else {
       // Non loggato
@@ -1501,11 +1706,13 @@ body {
       window._appData.checks = d.checks || {};
       window._appData.budget = d.budget || [];
       window._appData.contacts = d.contacts || [];
+      window._appData.rooms = d.rooms || {};
       document.querySelectorAll('.check-item').forEach(item => {
         if (window._appData.checks[item.dataset.id]) item.classList.add('checked');
         else item.classList.remove('checked');
       });
     }
+    renderRooms();
   }
 
   function saveData() {
@@ -1631,16 +1838,181 @@ body {
     window._saveData();
   };
 
+  // ── Rendering / Rooms ──
+  const ROOMS_CONFIG = [
+    { id: 'soggiorno',  name: 'Soggiorno',         desc: 'Zona living, divano, zona TV, libreria',   icon: '🛋️', bg1: '#E8DDD0', bg2: '#D4C4B0' },
+    { id: 'cucina',     name: 'Cucina',             desc: 'Cucina, zona cottura, dispensa',            icon: '🍳', bg1: '#D8E0D0', bg2: '#C4D0BC' },
+    { id: 'camera',     name: 'Camera da letto',    desc: 'Letto matrimoniale, armadio, comodini',     icon: '🛏️', bg1: '#D8D4E4', bg2: '#C4BEDD' },
+    { id: 'bagno',      name: 'Bagno',              desc: 'Sanitari, doccia, piastrelle, arredo',      icon: '🚿', bg1: '#D0DCE8', bg2: '#BCC8D4' },
+    { id: 'studio',     name: 'Studio',             desc: 'Scrivania, libreria, zona lavoro',          icon: '📚', bg1: '#E4DDD0', bg2: '#D4CAB8' },
+    { id: 'terrazzo',   name: 'Terrazzo / Giardino',desc: 'Spazio esterno, piante, arredo outdoor',   icon: '🌿', bg1: '#DCE4D8', bg2: '#C8D4C4' },
+  ];
+
+  let currentRoomId = null;
+
+  window.renderRooms = () => {
+    const list = document.getElementById('rooms-list');
+    list.innerHTML = ROOMS_CONFIG.map(room => {
+      const roomData = window._appData.rooms[room.id] || { old: [], new: [] };
+      const newPhotos = roomData.new || [];
+      const hasPhotos = newPhotos.length > 0;
+
+      const stackHtml = hasPhotos
+        ? `<div class="room-stack">
+            ${newPhotos.slice(0,3).map(src => `<img class="room-stack-img" src="${src}" alt="" />`).join('')}
+           </div>`
+        : `<div class="room-placeholder" style="--bg1:${room.bg1};--bg2:${room.bg2};">
+             <span class="room-placeholder-icon">${room.icon}</span>
+             <span class="room-placeholder-text">Nessuna foto</span>
+           </div>`;
+
+      const totalPhotos = (roomData.old || []).length + newPhotos.length;
+      const badgeHtml = totalPhotos > 0
+        ? `<span class="room-badge" style="background:rgba(141,196,145,0.15);color:var(--sage);">📷 ${totalPhotos} foto</span>`
+        : `<span class="room-badge">Aggiungi foto</span>`;
+
+      return `
+        <div class="room-card" onclick="openRoom('${room.id}')">
+          <div class="room-thumb-area">${stackHtml}</div>
+          <div class="room-info">
+            <div class="room-name">${room.name}</div>
+            <div class="room-desc">${room.desc}</div>
+            ${badgeHtml}
+          </div>
+        </div>`;
+    }).join('');
+  };
+
+  window.openRoom = (roomId) => {
+    currentRoomId = roomId;
+    const room = ROOMS_CONFIG.find(r => r.id === roomId);
+    document.getElementById('room-detail-title').textContent = room.name;
+    document.getElementById('room-detail-sub').textContent = room.desc;
+    document.getElementById('room-detail-tag').textContent = room.icon + '  ' + room.name;
+    renderPhotoGrid('old');
+    renderPhotoGrid('new');
+    // update nav
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-room-detail').classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll('.nav-link')[2].classList.add('active');
+    window.scrollTo(0, 0);
+  };
+
+  window.renderPhotoGrid = (style) => {
+    const roomData = window._appData.rooms[currentRoomId] || { old: [], new: [] };
+    const photos = roomData[style] || [];
+    const grid = document.getElementById('grid-' + style);
+    const count = document.getElementById('count-' + style);
+    const uploadBtn = document.getElementById('upload-btn-' + style);
+
+    count.textContent = photos.length + ' / 3';
+
+    // render thumbs + empty slots
+    let html = photos.map((src, i) => `
+      <div class="photo-thumb">
+        <img src="${src}" alt="" onclick="openLightbox('${src}')" />
+        <button class="photo-thumb-del" onclick="deletePhoto('${style}',${i})">✕</button>
+      </div>`).join('');
+
+    const empty = 3 - photos.length;
+    for (let i = 0; i < empty; i++) {
+      html += `<div class="photo-empty-slot"></div>`;
+    }
+    grid.innerHTML = html;
+
+    // disable upload if full
+    if (photos.length >= 3) {
+      uploadBtn.classList.add('disabled');
+    } else {
+      uploadBtn.classList.remove('disabled');
+    }
+  };
+
+  window.handleUpload = async (event, style) => {
+    const files = Array.from(event.target.files);
+    if (!files.length) return;
+    const roomData = window._appData.rooms[currentRoomId] || { old: [], new: [] };
+    if (!window._appData.rooms[currentRoomId]) window._appData.rooms[currentRoomId] = { old: [], new: [] };
+
+    const current = window._appData.rooms[currentRoomId][style] || [];
+    const canAdd = 3 - current.length;
+    const toAdd = files.slice(0, canAdd);
+
+    for (const file of toAdd) {
+      const b64 = await fileToBase64(file);
+      window._appData.rooms[currentRoomId][style] = window._appData.rooms[currentRoomId][style] || [];
+      window._appData.rooms[currentRoomId][style].push(b64);
+    }
+
+    renderPhotoGrid(style);
+    renderRooms();
+    window._saveData();
+    // reset input
+    event.target.value = '';
+  };
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      // Resize before storing to keep Firestore under limits
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX = 800;
+          let w = img.width, h = img.height;
+          if (w > MAX || h > MAX) {
+            if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+            else { w = Math.round(w * MAX / h); h = MAX; }
+          }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL('image/jpeg', 0.75));
+        };
+        img.src = e.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  window.deletePhoto = (style, index) => {
+    if (!window._appData.rooms[currentRoomId]) return;
+    window._appData.rooms[currentRoomId][style].splice(index, 1);
+    renderPhotoGrid(style);
+    renderRooms();
+    window._saveData();
+  };
+
+  window.openLightbox = (src) => {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+  };
+
+  window.closeLightbox = () => {
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightbox-img').src = '';
+  };
+
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+
   // ── Navigation ──
   window.showPage = (name) => {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + name).classList.add('active');
     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
     const links = document.querySelectorAll('.nav-link');
-    const map = { home: 0, acquisto: 1, rendering: 2, budget: 3, contatti: 4 };
-    if (links[map[name]]) links[map[name]].classList.add('active');
+    const map = { home: 0, acquisto: 1, rendering: 2, 'room-detail': 2, budget: 3, contatti: 4 };
+    if (links[map[name]] !== undefined) links[map[name]].classList.add('active');
     window.scrollTo(0, 0);
+    if (name === 'rendering') renderRooms();
   };
+
+  // Render rooms on init (even before login, shows empty state)
+  renderRooms();
 
   document.querySelectorAll('.modal-overlay').forEach(o => {
     o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
