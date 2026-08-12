@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Piano PAC 2027 — Investment Landing</title>
+<meta name="description" content="Landing page interattiva del piano PAC 2027-2056.">
+<style>
+:root{
+  --bg:#eef1f5; --ink:#14243b; --muted:#667386; --line:#d7dde6;
+  --blue:#2b69b0; --purple:#7356a8; --green:#2b8b5e; --gold:#bd8d2d;
+  --white:#fff; --dark:#10243e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif}
+a{color:inherit}
+.nav{position:fixed;z-index:20;top:18px;left:50%;transform:translateX(-50%);width:min(1100px,calc(100% - 28px));display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid rgba(215,221,230,.9);background:rgba(255,255,255,.78);backdrop-filter:blur(18px);border-radius:18px}
+.logo{font-weight:750;letter-spacing:-.02em}.navlinks{display:flex;gap:18px;font-size:13px;color:var(--muted)}.navlinks a{text-decoration:none}
+main{width:min(1120px,calc(100% - 32px));margin:auto}
+.hero{min-height:92vh;display:grid;align-items:center;padding:130px 0 70px}
+.eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);font-weight:750}
+h1{font-size:clamp(48px,8vw,94px);line-height:.92;letter-spacing:-.065em;margin:18px 0 24px;max-width:920px}
+.lead{font-size:clamp(19px,2.3vw,28px);line-height:1.25;color:var(--muted);max-width:760px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:999px;padding:13px 18px;font-weight:700;font-size:14px;border:1px solid var(--line);background:var(--white)}
+.btn.primary{background:var(--dark);color:#fff;border-color:var(--dark)}
+.section{padding:90px 0}
+.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:34px}
+h2{font-size:clamp(32px,5vw,54px);line-height:1;letter-spacing:-.045em;margin:0}
+.section-head p{max-width:430px;color:var(--muted);line-height:1.5;margin:0}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.metric{padding:22px;border-top:3px solid var(--blue);background:rgba(255,255,255,.42)}
+.metric:nth-child(2){border-color:var(--green)}.metric:nth-child(3){border-color:var(--purple)}.metric:nth-child(4){border-color:var(--gold)}
+.metric small{color:var(--muted);font-size:12px}.metric strong{display:block;font-size:30px;letter-spacing:-.04em;margin-top:8px}
+.chart-stage{height:145vh;position:relative}
+.chart-sticky{position:sticky;top:0;height:100vh;display:grid;align-content:center}
+.chart-shell{position:relative}
+.chart-shell svg{width:100%;height:auto;overflow:visible}
+.gridline{stroke:var(--line);stroke-width:1}
+.axis{stroke:#aab4c2;stroke-width:1.2}
+.wave-bg{fill:none;stroke:#cfd7e1;stroke-width:4}
+.wave{fill:none;stroke:var(--blue);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.area{fill:var(--blue);opacity:.10}
+.chart-info{display:flex;align-items:end;justify-content:space-between;margin-top:12px}
+.year-big{font-size:clamp(30px,5vw,54px);font-weight:800;letter-spacing:-.05em}
+.chart-note{color:var(--muted);font-size:13px}
+.timeline{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:4px}
+.pie-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+.pie-wrap{display:flex;justify-content:center}
+.pie{width:min(440px,100%);aspect-ratio:1}
+.slice{transform-origin:50% 50%;transition:transform .22s ease,opacity .22s ease;cursor:pointer}
+.slice:hover,.slice.active{transform:translate(var(--dx),var(--dy));filter:drop-shadow(0 10px 16px rgba(20,36,59,.12))}
+.pie-tooltip{position:absolute;display:none;z-index:5;min-width:190px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(20,36,59,.12);font-size:14px;line-height:1.35;pointer-events:none}
+.pie-tooltip strong{font-weight:800;color:var(--ink)}
+.pie-wrap{position:relative}
+.pie-label{font-size:12px;fill:var(--ink);font-weight:700}
+.alloc-list{display:grid;gap:16px}
+.alloc{display:grid;grid-template-columns:12px 1fr auto;gap:13px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.dot{width:10px;height:10px;border-radius:50%}.alloc b{font-size:16px}.alloc span{color:var(--muted);font-size:13px}
+.alloc .pct{font-size:24px;color:var(--ink);font-weight:800}
+.etfs{display:grid;gap:12px}
+.etf{display:grid;grid-template-columns:76px 1fr auto;gap:20px;align-items:center;padding:24px 26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;background:rgba(255,255,255,.24);transition:transform .2s,background .2s}
+.etf:hover{transform:translateX(5px);background:rgba(255,255,255,.72)}
+.ticker{font-size:22px;font-weight:850}.etf h3{margin:0 0 6px;font-size:17px}.etf p{margin:0;color:var(--muted);font-size:13px}.isin{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--muted)}
+.pill{border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:750}
+.articles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.article{padding:22px;border:1px solid var(--line);background:rgba(255,255,255,.42);min-height:190px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none}
+.article:hover{background:#fff}.article small{color:var(--muted)}.article h3{font-size:19px;line-height:1.15;margin:20px 0}.article .read{font-weight:750;font-size:13px}
+.callout{margin-top:40px;padding:28px 30px;background:var(--dark);color:#fff;border-radius:24px}
+.callout p{color:#c8d1dd;max-width:760px;line-height:1.5}
+footer{padding:60px 0 80px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+@media(max-width:800px){
+ .navlinks{display:none}.hero{min-height:auto;padding-top:150px}.metrics{grid-template-columns:repeat(2,1fr)}
+ .pie-layout{grid-template-columns:1fr;gap:25px}.articles{grid-template-columns:1fr}
+ .etf{grid-template-columns:62px 1fr}.etf .pill{display:none}
+ .chart-stage{height:125vh}
+}
+@media(max-width:520px){main{width:min(100% - 22px,1120px)}.metrics{grid-template-columns:1fr 1fr}.metric{padding:15px}.metric strong{font-size:23px}.section{padding:65px 0}h1{font-size:52px}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">PAC 2027<span style="color:var(--blue)">.</span></div>
+  <div class="navlinks">
+    <a href="#crescita">Crescita</a><a href="#allocazione">Allocazione</a><a href="#etf">ETF</a><a href="#articoli">Approfondimenti</a>
+  </div>
+</nav>
+
+<main>
+<section class="hero">
+  <div>
+    <div class="eyebrow">Investment plan · 2027 — 2056</div>
+    <h1>Piccoli versamenti.<br><span style="color:var(--blue)">30 anni</span> di tempo.</h1>
+    <p class="lead">Un PAC costruito per creare liquidità futura da affiancare alla pensione, con una quota core globale e due satelliti tematici.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#crescita">Esplora il piano ↓</a>
+      <a class="btn" href="#etf">Vedi gli ETF</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="metrics">
+    <div class="metric"><small>PAC iniziale</small><strong>100 €</strong><small>al mese</small></div>
+    <div class="metric"><small>Incremento</small><strong>+50 €</strong><small>ogni 5 anni</small></div>
+    <div class="metric"><small>Cashback ipotizzato</small><strong>8 €</strong><small>su 800 € di spese</small></div>
+    <div class="metric"><small>Scenario</small><strong>6%</strong><small>medio annuo, non garantito</small></div>
+  </div>
+</section>
+
+<section id="crescita" class="section chart-stage">
+  <div class="chart-sticky">
+    <div class="section-head">
+      <div><div class="eyebrow">01 · Capitalizzazione</div><h2>Guarda il capitale crescere.</h2></div>
+      <p>Scorri. La curva si costruisce progressivamente: ogni punto rappresenta un anno del piano.</p>
+    </div>
+    <div class="chart-shell">
+      <svg id="growthSvg" viewBox="0 0 1000 430" role="img" aria-label="Proiezione del capitale dal 2027 al 2056 con rendimento medio ipotetico del 6%">
+        <defs><linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2b69b0" stop-opacity=".22"/><stop offset="1" stop-color="#2b69b0" stop-opacity="0"/></linearGradient></defs>
+        <line class="gridline" x1="70" y1="90" x2="960" y2="90"/><line class="gridline" x1="70" y1="180" x2="960" y2="180"/><line class="gridline" x1="70" y1="270" x2="960" y2="270"/><line class="axis" x1="70" y1="350" x2="960" y2="350"/>
+        <path id="area" class="area"></path><path id="waveBg" class="wave-bg"></path><path id="wave" class="wave"></path>
+        <circle id="point" cx="70" cy="350" r="7" fill="#2b69b0"/>
+      </svg>
+      <div class="chart-info"><div><div class="chart-note">Anno del piano</div><div class="year-big" id="yearReadout">2027</div></div><div style="text-align:right"><div class="chart-note">Capitale simulato</div><div class="year-big" id="valueReadout">108 €</div></div></div>
+      <div class="timeline"><span>2027</span><span>2032</span><span>2037</span><span>2042</span><span>2047</span><span>2052</span><span>2056</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="allocazione" class="section">
+  <div class="section-head">
+    <div><div class="eyebrow">02 · Allocazione</div><h2>Il portafoglio.</h2></div>
+    <p>Clicca su una fetta. La componente selezionata viene portata in primo piano e mostra il versamento mensile.</p>
+  </div>
+  <div class="pie-layout">
+    <div class="pie-wrap">
+      <div id="pieTooltip" class="pie-tooltip" aria-live="polite"></div>
+      <svg class="pie" viewBox="0 0 400 400" role="img" aria-label="Allocazione 85% VWCE, 10% AI e Robotics, 5% PIKA">
+        <g id="pieSlices"></g>
+        <circle cx="200" cy="200" r="83" fill="var(--bg)"/>
+        <text x="200" y="193" text-anchor="middle" font-size="13" fill="var(--muted)">PAC</text>
+        <text x="200" y="221" text-anchor="middle" font-size="28" font-weight="800" fill="var(--ink)">85 / 10 / 5</text>
+      </svg>
+    </div>
+    <div class="alloc-list" id="allocList"></div>
+  </div>
+</section>
+
+<section id="etf" class="section">
+  <div class="section-head">
+    <div><div class="eyebrow">03 · Gli strumenti</div><h2>I tre ETF.</h2></div>
+    <p>Clicca su un ETF per aprire la pagina ufficiale italiana del prodotto.</p>
+  </div>
+  <div class="etfs">
+    <a class="etf" href="https://www.borsaitaliana.it/borsa/etf/listino-ufficiale.html?isin=IE00BK5BQT80&lang=it" target="_blank" rel="noopener">
+      <div class="ticker" style="color:var(--blue)">VWCE</div><div><h3>Vanguard FTSE All-World UCITS ETF</h3><p>Core globale · <span class="isin">IE00BK5BQT80</span></p></div><div class="pill">85%</div>
+    </a>
+    <a class="etf" href="https://www.borsaitaliana.it/borsa/etf/listino-ufficiale.html?isin=LU1861132840&lang=it" target="_blank" rel="noopener">
+      <div class="ticker" style="color:var(--purple)">GOAI</div><div><h3>Amundi MSCI Robotics & AI UCITS ETF Acc</h3><p>AI · robotica · automazione · <span class="isin">LU1861132840</span></p></div><div class="pill">10%</div>
+    </a>
+    <a class="etf" href="https://www.borsaitaliana.it/borsa/etf/listino-ufficiale.html?isin=IE000YYVSM16&lang=it" target="_blank" rel="noopener">
+      <div class="ticker" style="color:var(--green)">PIKA</div><div><h3>VanEck Electrification and Power Infrastructure UCITS ETF</h3><p>Elettrificazione · infrastrutture · <span class="isin">IE000YYVSM16</span></p></div><div class="pill">5%</div>
+    </a>
+  </div>
+</section>
+
+<section id="articoli" class="section">
+  <div class="section-head">
+    <div><div class="eyebrow">04 · Approfondimenti</div><h2>Il contesto.</h2></div>
+    <p>Una selezione di contenuti del Sole 24 Ore sui temi che stanno dietro ai satelliti del portafoglio.</p>
+  </div>
+  <div class="articles">
+    <a class="article" href="https://st.ilsole24ore.com/art/finanza-e-mercati/2017-11-13/addio-gestori-umani-arrivano-primi-due-etf-guidati-intelligenze-artificiali-161003.shtml" target="_blank" rel="noopener">
+      <div><small>Il Sole 24 Ore · AI & ETF</small><h3>Addio gestori umani: arrivano i primi due ETF guidati da intelligenze artificiali</h3></div><div class="read">Leggi l'articolo →</div>
+    </a>
+    <a class="article" href="https://st.ilsole24ore.com/art/tecnologie/2016-01-13/robotica-e-tecnologie-non-vedenti-horus-technology-raccoglie-900mila-dollari--131248.shtml" target="_blank" rel="noopener">
+      <div><small>Il Sole 24 Ore · Robotica</small><h3>Robotica e tecnologie: l'accelerazione delle applicazioni reali</h3></div><div class="read">Leggi l'articolo →</div>
+    </a>
+    <a class="article" href="https://24oreventi.ilsole24ore.com/powering-data-center-2026/" target="_blank" rel="noopener">
+      <div><small>Il Sole 24 Ore · Energia</small><h3>Powering Data Center: infrastrutture energetiche per il futuro digitale</h3></div><div class="read">Approfondisci →</div>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="callout">
+    <div class="eyebrow" style="color:#8fb9eb">Obiettivo</div>
+    <h2 style="color:#fff;margin-top:10px">Costruire liquidità futura da affiancare alla pensione.</h2>
+    <p>Scenario illustrativo: 100 € al mese dal 2027, aumento di 50 € ogni 5 anni, 8 € di cashback mensile investito e rendimento medio ipotetico del 6%. Il rendimento reale può essere molto diverso.</p>
+  </div>
+</section>
+
+<footer>
+  <strong>Piano PAC 2027 — pagina illustrativa</strong><br><br>
+  Dati del piano: simulazione matematica, non previsione finanziaria. ETF, ISIN e pagine prodotto verificati sulle fonti disponibili al momento della realizzazione. PIKA è un ETF lanciato nel 2026 e ha uno storico ancora breve.
+</footer>
+</main>
+
+<script>
+const YEARS=30, START=100, STEP=50, CASHBACK=8, R=0.06;
+const mr=(1+R)**(1/12)-1;
+let vals=[], portfolio=0;
+for(let m=1;m<=YEARS*12;m++){
+  const pac=START+STEP*Math.floor((m-1)/60);
+  portfolio=(portfolio+pac+CASHBACK)*(1+mr);
+  if(m%12===0) vals.push({year:2026+m/12,value:portfolio});
+}
+const finalValue=vals.at(-1).value;
+
+const svg=document.getElementById("growthSvg"), wave=document.getElementById("wave"), waveBg=document.getElementById("waveBg"), area=document.getElementById("area"), point=document.getElementById("point");
+const minX=70,maxX=960,minY=350,maxY=62,maxVal=Math.max(...vals.map(d=>d.value));
+const pts=vals.map((d,i)=>({x:minX+(maxX-minX)*i/(vals.length-1),y:minY-(minY-maxY)*(d.value/maxVal)}));
+const d=pts.map((p,i)=>(i?"L":"M")+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" ");
+wave.setAttribute("d",d); waveBg.setAttribute("d",d);
+area.setAttribute("d",d+" L "+pts.at(-1).x+" "+minY+" L "+pts[0].x+" "+minY+" Z");
+const totalLen=wave.getTotalLength(); wave.style.strokeDasharray=totalLen; wave.style.strokeDashoffset=totalLen;
+function updateGrowth(progress){
+  const p=Math.max(0,Math.min(1,progress));
+  wave.style.strokeDashoffset=totalLen*(1-p);
+  const idx=Math.min(vals.length-1,Math.floor(p*(vals.length-1)));
+  point.setAttribute("cx",pts[idx].x); point.setAttribute("cy",pts[idx].y);
+  document.getElementById("yearReadout").textContent=vals[idx].year;
+  document.getElementById("valueReadout").textContent=new Intl.NumberFormat("it-IT",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(vals[idx].value);
+}
+const stage=document.getElementById("crescita");
+function scrollGrowth(){
+  const rect=stage.getBoundingClientRect(), range=rect.height-innerHeight, p=(0-rect.top)/Math.max(1,range);
+  updateGrowth(p);
+}
+addEventListener("scroll",scrollGrowth,{passive:true}); scrollGrowth();
+
+const alloc=[
+ {name:"VWCE",pct:85,monthly:85,color:"#2b69b0",dx:"-4px",dy:"-2px"},
+ {name:"AI & Robotics",pct:10,monthly:10,color:"#7356a8",dx:"6px",dy:"-4px"},
+ {name:"PIKA",pct:5,monthly:5,color:"#2b8b5e",dx:"5px",dy:"7px"}
+];
+const center=200,radius=145,circ=2*Math.PI*radius;
+const g=document.getElementById("pieSlices"), list=document.getElementById("allocList");
+const pieWrap=document.querySelector(".pie-wrap"), tooltip=document.getElementById("pieTooltip");
+let offset=0, selected=null;
+
+alloc.forEach((a,i)=>{
+  const len=circ*a.pct/100, gap=2;
+  const c=document.createElementNS("http://www.w3.org/2000/svg","circle");
+  c.setAttribute("cx",center); c.setAttribute("cy",center); c.setAttribute("r",radius);
+  c.setAttribute("fill","none"); c.setAttribute("stroke",a.color); c.setAttribute("stroke-width","58");
+  c.setAttribute("stroke-dasharray",`${Math.max(0,len-gap)} ${circ-len+gap}`);
+  c.setAttribute("stroke-dashoffset",-offset); c.setAttribute("class","slice");
+  c.style.setProperty("--dx",a.dx); c.style.setProperty("--dy",a.dy); c.dataset.i=i;
+  g.appendChild(c);
+  offset+=len;
+
+  const row=document.createElement("div"); row.className="alloc";
+  row.innerHTML=`<span class="dot" style="background:${a.color}"></span><div><b>${a.name}</b><br><span>${i===0?"Core globale":i===1?"AI · robotica · automazione":"Elettrificazione · infrastrutture"}</span></div><div class="pct">${a.pct}%</div>`;
+  row.addEventListener("click",()=>selectSlice(i));
+  list.appendChild(row);
+
+  c.addEventListener("mouseenter",()=>activate(i));
+  c.addEventListener("mouseleave",()=>{ if(selected!==i) activate(null); });
+  c.addEventListener("click",()=>selectSlice(i));
+});
+
+function activate(i){
+  [...g.children].forEach((el,n)=>el.classList.toggle("active",n===i));
+}
+
+function selectSlice(i){
+  selected=i;
+  const a=alloc[i];
+  activate(i);
+  tooltip.innerHTML=`<strong>${a.name}</strong><br>${a.monthly} € al mese`;
+  tooltip.style.display="block";
+
+  const c=g.children[i];
+  const svgRect=document.querySelector(".pie").getBoundingClientRect();
+  const wrapRect=pieWrap.getBoundingClientRect();
+
+  // Position the bubble near the selected slice.
+  const angle = (i===0 ? -0.65 : i===1 ? -2.05 : 2.25);
+  const x = svgRect.left-wrapRect.left + svgRect.width*(0.5+0.34*Math.cos(angle));
+  const y = svgRect.top-wrapRect.top + svgRect.height*(0.5+0.34*Math.sin(angle));
+  tooltip.style.left=Math.max(8,Math.min(wrapRect.width-205,x))+"px";
+  tooltip.style.top=Math.max(8,Math.min(wrapRect.height-70,y))+"px";
+}
+
+document.addEventListener("click",(e)=>{
+  if(!e.target.closest(".pie-wrap") && selected!==null){
+    selected=null; activate(null); tooltip.style.display="none";
+  }
+});
+
+document.querySelectorAll(".etf").forEach(el=>el.addEventListener("click",()=>{}));
+</script>
+</body>
+</html>
